@@ -11,6 +11,8 @@ O dossiê original está em `docs/dossie-caso-047.pdf`. Perguntas e textos do jo
 - `npm run dev` — servidor local (aberto na rede, para testar no celular)
 - `npm run build` — checagem de tipos + build de produção
 - `npm run lint` — oxlint
+- `npm test` — testes de pontuação (node:test)
+- Sem Supabase configurado, `npm run dev` usa um modo local: host numa aba, jogadores em outras abas do mesmo navegador.
 
 ## Regras do projeto
 

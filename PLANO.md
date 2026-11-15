@@ -295,11 +295,11 @@ O celular é pensado primeiro para telas pequenas. A tela do host é pensada par
 - [x] `caso047.json` com fichas, 12 evidências e 13 perguntas + deduções
 - [x] Revisar se cada pergunta tem só uma resposta defensável pelo dossiê
 
-### Fase 3 — Ciclo da pergunta
-- [ ] Máquina de estados no host
-- [ ] Telas Pergunta / Revelação / Ranking no host
-- [ ] Telas Responder / Resultado no celular, com trava de leitura
-- [ ] Pontuação (`pontuacao.ts`) com testes
+### Fase 3 — Ciclo da pergunta ✅
+- [x] Máquina de estados no host
+- [x] Telas Pergunta / Revelação / Ranking no host
+- [x] Telas Responder / Resultado no celular, com trava de leitura
+- [x] Pontuação (`pontuacao.ts`) com testes
 
 ### Fase 4 — Rodadas especiais
 - [ ] Memória (pistas somem), Ordenar (dnd-kit) e Aposta de Jane

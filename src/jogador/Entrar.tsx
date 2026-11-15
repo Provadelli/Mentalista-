@@ -1,30 +1,21 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import Avatar from '../componentes/Avatar'
 import { PERSONAGENS } from '../dados/personagens'
-import { useSalaJogador } from '../realtime/useSalaJogador'
+import type { EstadoSala } from '../jogo/tipos'
+import type { StatusJogador } from '../realtime/useSalaJogador'
 
-export default function Entrar() {
-  const [params] = useSearchParams()
-  const sala = params.get('sala') ?? ''
+type Props = {
+  sala: string
+  estado: EstadoSala | null
+  status: StatusJogador
+  entrar: (nome: string, avatar: string) => void
+  tentarDeNovo: () => void
+}
+
+export default function Entrar({ sala, estado, status, entrar, tentarDeNovo }: Props) {
   const [nome, setNome] = useState('')
   const [avatar, setAvatar] = useState<string | null>(null)
-  const { estado, status, entrar, eu, tentarDeNovo } = useSalaJogador(sala)
   const emUso = new Set(estado?.avataresEmUso ?? [])
-
-  if (eu) {
-    return (
-      <main className="fundo-couro grid min-h-dvh place-items-center px-4 text-center">
-        <div className="w-40">
-          <div className="papel-arquivo rounded-sm p-2">
-            <Avatar id={eu.avatar} />
-          </div>
-          <p className="mt-4 font-titulo text-2xl">{eu.nome}</p>
-          <p className="mt-2 font-dossie text-manila">Você está no caso. Olhe para a TV.</p>
-        </div>
-      </main>
-    )
-  }
 
   const aviso =
     status === 'semServidor'
@@ -33,7 +24,9 @@ export default function Entrar() {
         ? 'Conectando à sala…'
         : status === 'cheia'
           ? 'Sala cheia: o caso já tem 7 investigadores.'
-          : status === 'avatarEmUso'
+          : status === 'emAndamento'
+            ? 'A investigação já começou. Aguarde a próxima partida.'
+            : status === 'avatarEmUso'
             ? 'Esse personagem acabou de ser escolhido. Escolha outro.'
             : null
 

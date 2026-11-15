@@ -1,15 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { QRCodeSVG } from 'qrcode.react'
-import { useParams } from 'react-router-dom'
 import Avatar from '../componentes/Avatar'
 import { PERSONAGENS } from '../dados/personagens'
-import { LIMITE_JOGADORES } from '../jogo/tipos'
-import { useSalaHost } from '../realtime/useSalaHost'
+import { modoLocal } from '../realtime/cliente'
+import { LIMITE_JOGADORES, type Jogador } from '../jogo/tipos'
 
-export default function Lobby() {
-  const { sala = '' } = useParams()
+type Props = { sala: string; jogadores: Jogador[]; conectado: boolean; remover: (id: string) => void; comecar: () => void }
+
+export default function Lobby({ sala, jogadores, conectado, remover, comecar }: Props) {
   const link = `${window.location.origin}/entrar?sala=${sala}`
-  const { jogadores, conectado, remover } = useSalaHost(sala)
 
   return (
     <main className="fundo-cortica min-h-dvh p-6 lg:p-12">
@@ -24,6 +23,11 @@ export default function Lobby() {
           <p className="mt-3 font-dossie text-lg text-tinta/80">
             {jogadores.length} de {LIMITE_JOGADORES} na sala
           </p>
+          {modoLocal && (
+            <p className="mt-3 rounded-sm bg-couro px-4 py-2 font-dossie text-papel">
+              Modo local: sem Supabase, os jogadores entram por outras abas deste navegador.
+            </p>
+          )}
           {!conectado && (
             <p className="mt-3 rounded-sm bg-redjohn px-4 py-2 font-dossie text-papel">
               Tempo real desligado: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.
@@ -60,6 +64,7 @@ export default function Lobby() {
           </ul>
           <button
             disabled={jogadores.length < 2}
+            onClick={comecar}
             className="mt-10 min-h-12 rounded-sm bg-couro px-8 py-3 font-titulo text-xl text-papel transition hover:bg-couro-claro disabled:opacity-40"
           >
             Começar

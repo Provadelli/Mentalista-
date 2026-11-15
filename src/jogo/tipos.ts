@@ -3,7 +3,7 @@ export type Jogador = { playerId: string; nome: string; avatar: string; pontos: 
 export type EstadoSala = { jogadores: Jogador[]; avataresEmUso: string[]; cheia: boolean }
 
 export type MsgEntrar = { playerId: string; nome: string; avatar: string }
-export type MsgRecusa = { playerId: string; motivo: 'cheia' | 'avatar' }
+export type MsgRecusa = { playerId: string; motivo: 'cheia' | 'avatar' | 'emAndamento' }
 
 export const LIMITE_JOGADORES = 7
 
@@ -28,3 +28,31 @@ export type Caso = {
   motivos: string[]
   rodadas: Rodada[]
 }
+
+/** O que o celular recebe em cada fase. Nunca contém o gabarito antes da REVELACAO. */
+export type FasePublica =
+  | { fase: 'LOBBY' }
+  | { fase: 'ABERTURA_RODADA'; rodada: { id: number; titulo: string } }
+  | {
+      fase: 'PERGUNTA'
+      perguntaId: string
+      tipo: 'escolha' | 'memoria' | 'ordenar'
+      enunciado: string
+      opcoes: string[]
+      aposta: boolean
+      /** Relógio do host: o celular corrige pela diferença com `agora`. */
+      agora: number
+      destravaEm: number
+      fimEm: number
+    }
+  | {
+      fase: 'REVELACAO'
+      perguntaId: string
+      correta: number | null
+      deducao: string
+      resultados: Record<string, { acertou: boolean; ganho: number }>
+    }
+  | { fase: 'RANKING' }
+  | { fase: 'PODIO' }
+
+export type MsgResponder = { playerId: string; perguntaId: string; opcao?: number; ordem?: number[]; aposta?: 1 | 2 | 3 }
