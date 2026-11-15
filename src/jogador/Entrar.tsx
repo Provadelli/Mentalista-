@@ -1,18 +1,49 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { PERSONAGENS, iniciais } from '../dados/personagens'
+import Avatar from '../componentes/Avatar'
+import { PERSONAGENS } from '../dados/personagens'
+import { useSalaJogador } from '../realtime/useSalaJogador'
 
 export default function Entrar() {
   const [params] = useSearchParams()
   const sala = params.get('sala') ?? ''
   const [nome, setNome] = useState('')
   const [avatar, setAvatar] = useState<string | null>(null)
+  const { estado, status, entrar, eu, tentarDeNovo } = useSalaJogador(sala)
+  const emUso = new Set(estado?.avataresEmUso ?? [])
+
+  if (eu) {
+    return (
+      <main className="fundo-couro grid min-h-dvh place-items-center px-4 text-center">
+        <div className="w-40">
+          <div className="papel-arquivo rounded-sm p-2">
+            <Avatar id={eu.avatar} />
+          </div>
+          <p className="mt-4 font-titulo text-2xl">{eu.nome}</p>
+          <p className="mt-2 font-dossie text-manila">Você está no caso. Olhe para a TV.</p>
+        </div>
+      </main>
+    )
+  }
+
+  const aviso =
+    status === 'semServidor'
+      ? 'Tempo real indisponível neste site.'
+      : status === 'conectando'
+        ? 'Conectando à sala…'
+        : status === 'cheia'
+          ? 'Sala cheia: o caso já tem 7 investigadores.'
+          : status === 'avatarEmUso'
+            ? 'Esse personagem acabou de ser escolhido. Escolha outro.'
+            : null
 
   return (
     <main className="fundo-couro min-h-dvh px-4 pb-8 pt-[max(1.5rem,env(safe-area-inset-top))]">
       <div className="mx-auto max-w-md">
         <p className="font-dossie text-sm text-manila/80">Caso 047 · Sala {sala}</p>
         <h1 className="mt-1 font-titulo text-3xl">Identifique-se, investigador</h1>
+
+        {aviso && <p className="mt-4 rounded-sm bg-redjohn px-4 py-2 font-dossie text-papel">{aviso}</p>}
 
         <label className="mt-6 block font-dossie text-sm text-manila" htmlFor="nome">
           Seu nome
@@ -28,29 +59,38 @@ export default function Entrar() {
 
         <p className="mt-6 font-dossie text-sm text-manila">Escolha seu personagem</p>
         <ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4">
-          {PERSONAGENS.map((p) => (
-            <li key={p.id}>
-              <button
-                onClick={() => setAvatar(p.id)}
-                aria-pressed={avatar === p.id}
-                className={`papel-arquivo flex w-full flex-col items-center rounded-sm p-2 transition active:scale-95 ${
-                  avatar === p.id ? 'ring-4 ring-ouro' : ''
-                }`}
-              >
-                <span className="grid aspect-square w-full place-items-center overflow-hidden bg-couro-claro font-titulo text-xl text-papel">
-                  {iniciais(p.nome)}
-                </span>
-                <span className="mt-1 text-center text-xs font-semibold leading-tight">{p.nome}</span>
-              </button>
-            </li>
-          ))}
+          {PERSONAGENS.map((p) => {
+            const ocupado = emUso.has(p.id)
+            return (
+              <li key={p.id}>
+                <button
+                  disabled={ocupado}
+                  onClick={() => {
+                    setAvatar(p.id)
+                    if (status === 'avatarEmUso') tentarDeNovo()
+                  }}
+                  aria-pressed={avatar === p.id}
+                  className={`papel-arquivo relative flex w-full flex-col items-center rounded-sm p-2 transition active:scale-95 disabled:opacity-50 ${
+                    avatar === p.id && !ocupado ? 'ring-4 ring-ouro' : ''
+                  }`}
+                >
+                  <Avatar id={p.id} />
+                  {ocupado && (
+                    <span className="carimbo absolute top-1/3 -rotate-12 bg-manila/80 text-xs">Em uso</span>
+                  )}
+                  <span className="mt-1 text-center text-xs font-semibold leading-tight">{p.nome}</span>
+                </button>
+              </li>
+            )
+          })}
         </ul>
 
         <button
-          disabled={!nome.trim() || !avatar}
+          disabled={!nome.trim() || !avatar || emUso.has(avatar) || status !== 'escolhendo'}
+          onClick={() => avatar && entrar(nome.trim(), avatar)}
           className="mt-8 min-h-12 w-full rounded-sm bg-redjohn px-6 py-3 font-titulo text-xl text-papel transition disabled:opacity-40"
         >
-          Entrar no caso
+          {status === 'enviando' ? 'Entrando…' : 'Entrar no caso'}
         </button>
       </div>
     </main>

@@ -286,10 +286,10 @@ O celular é pensado primeiro para telas pequenas. A tela do host é pensada par
 - [ ] Projeto na Vercel ligado ao repositório
 - [ ] Projeto no Supabase e variáveis de ambiente na Vercel
 
-### Fase 1 — Sala em tempo real
-- [ ] Cliente Supabase e hooks `useSalaHost` / `useSalaJogador`
-- [ ] Jogadores aparecem no lobby, avatares em uso bloqueados, limite de 7
-- [ ] Reconexão com `playerId`
+### Fase 1 — Sala em tempo real ✅
+- [x] Cliente Supabase e hooks `useSalaHost` / `useSalaJogador`
+- [x] Jogadores aparecem no lobby, avatares em uso bloqueados, limite de 7
+- [x] Reconexão com `playerId`
 
 ### Fase 2 — Conteúdo
 - [ ] `caso047.json` com fichas, 12 evidências e 13 perguntas + deduções
