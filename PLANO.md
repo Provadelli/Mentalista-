@@ -291,9 +291,9 @@ O celular é pensado primeiro para telas pequenas. A tela do host é pensada par
 - [x] Jogadores aparecem no lobby, avatares em uso bloqueados, limite de 7
 - [x] Reconexão com `playerId`
 
-### Fase 2 — Conteúdo
-- [ ] `caso047.json` com fichas, 12 evidências e 13 perguntas + deduções
-- [ ] Revisar se cada pergunta tem só uma resposta defensável pelo dossiê
+### Fase 2 — Conteúdo ✅
+- [x] `caso047.json` com fichas, 12 evidências e 13 perguntas + deduções
+- [x] Revisar se cada pergunta tem só uma resposta defensável pelo dossiê
 
 ### Fase 3 — Ciclo da pergunta
 - [ ] Máquina de estados no host
