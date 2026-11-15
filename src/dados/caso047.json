@@ -1,0 +1,92 @@
+{
+  "titulo": "Caso 047 — A última noite no Hotel Aurora",
+  "cenario": {
+    "texto": "Sábado, 14 de novembro. O Hotel Aurora recebe uma comemoração reservada para celebrar a venda de uma rede de hotéis. Augusto Valença, 52 anos, dono do grupo, reuniu sócios, funcionários e pessoas próximas. Às 22h17, a gerente encontra Augusto caído no escritório do segundo andar. Não há sinais de arrombamento. O médico plantonista estima que a morte ocorreu entre 22h00 e 22h15.",
+    "fatos": [
+      "O escritório só podia ser acessado pelo corredor principal ou pela pequena sala de arquivo, cuja porta costuma ficar trancada.",
+      "A festa tinha música alta; ninguém consegue garantir que ouviu todos os movimentos no corredor.",
+      "Augusto havia discutido com mais de uma pessoa naquela noite.",
+      "O celular da vítima não foi encontrado no escritório."
+    ],
+    "linhaDoTempo": [
+      { "hora": "21h35", "fato": "Augusto é visto entrando no escritório." },
+      { "hora": "21h48", "fato": "Uma discussão é ouvida perto do elevador." },
+      { "hora": "22h03", "fato": "A música da festa é aumentada após reclamação de um convidado." },
+      { "hora": "22h17", "fato": "O corpo é encontrado pela gerente." }
+    ]
+  },
+  "suspeitos": [
+    { "id": "helena", "nome": "Helena Valença", "papel": "esposa da vítima", "ficha": "Você é a esposa de Augusto. Nos últimos meses, o casamento estava por um fio. Todos sabem: vocês discutiram durante o jantar. Seu segredo: descobriu que Augusto pretendia alterar o testamento, mas não sabe o conteúdo. Às 22h00, afirma que estava no jardim fazendo uma ligação. Você apagou uma mensagem comprometedora do seu próprio celular, mas ela não tem relação com a morte. Interprete: mantenha a calma; não conte seu segredo espontaneamente." },
+    { "id": "rafael", "nome": "Rafael Moura", "papel": "sócio financeiro", "ficha": "Você era responsável pelas contas do grupo. Augusto havia pedido uma auditoria. Todos sabem: sua parceria estava sob pressão. Seu segredo: transferiu dinheiro da empresa para cobrir uma dívida pessoal e temia ser descoberto. Às 22h00, diz que estava no bar, mas saiu por alguns minutos para atender uma ligação. Interprete: seja defensivo quando perguntarem sobre dinheiro." },
+    { "id": "clara", "nome": "Clara Nunes", "papel": "gerente do hotel", "ficha": "Você trabalha no Aurora há 12 anos e encontrou o corpo. Todos sabem: conhece as rotinas e as chaves do prédio. Seu segredo: recebeu ordem de Augusto para destruir um registro de acesso antigo, mas não cumpriu. Às 22h00, estava na recepção, segundo você. Interprete: responda com precisão, mas evite falar sobre os registros." },
+    { "id": "miguel", "nome": "Miguel Valença", "papel": "filho da vítima", "ficha": "Você e Augusto tinham uma relação difícil. Todos sabem: ele ameaçou cortar sua mesada. Seu segredo: foi ao escritório às 21h48 e discutiu com ele; saiu antes das 22h00. Deixou cair um botão do casaco no corredor. Às 22h00, afirma que estava na varanda. Interprete: não negue a discussão se confrontado, mas não admita algo que não fez." },
+    { "id": "sofia", "nome": "Dra. Sofia Reis", "papel": "médica e amiga da família", "ficha": "Você conhecia Augusto havia anos. Todos sabem: ele confiava em você para assuntos pessoais. Seu segredo: naquela noite, ele pediu que você analisasse um documento médico antigo; você recusou. Às 22h00, estava na sala de leitura. Interprete: explique que não pode determinar a causa da morte com base no que viu." },
+    { "id": "tomas", "nome": "Tomás Lira", "papel": "chefe de segurança", "ficha": "Você coordenava a segurança do evento. Todos sabem: tinha acesso às câmeras e aos corredores. Seu segredo: uma câmera do corredor do escritório estava desligada desde as 21h30 por uma falha que você não registrou. Às 22h00, estava na sala de monitoramento. Interprete: seja objetivo, mas não esconda a falha se a prova aparecer." }
+  ],
+  "apoio": [
+    { "id": "livia", "nome": "Lívia Costa", "papel": "repórter local", "ficha": "Você cobria a festa. Viu alguém sair apressado do corredor às 22h06, mas não identificou a pessoa. Ela segurava algo pequeno e escuro. Não revele a observação até a Rodada 2." },
+    { "id": "eduardo", "nome": "Eduardo Pires", "papel": "perito de plantão", "ficha": "Você recebeu um resumo preliminar: não há ferimento externo evidente; a taça quebrada não parece ter causado a morte. A análise toxicológica ainda não está pronta. Não especule sobre substâncias." },
+    { "id": "bianca", "nome": "Bianca Alves", "papel": "assistente de eventos", "ficha": "Você organizou a lista de convidados e guardou uma cópia do cronograma. Às 21h55, levou uma pasta ao corredor do segundo andar, mas não entrou no escritório. Viu a porta da sala de arquivo entreaberta." },
+    { "id": "andre", "nome": "André Farias", "papel": "garçom", "ficha": "Você serviu bebidas. Lembra que Augusto pediu água sem gelo às 21h40. Às 22h08, encontrou um guardanapo com tinta azul perto da escada. Você o guardou no bolso e esqueceu de entregar." }
+  ],
+  "evidencias": [
+    { "id": "A1", "envelope": "A", "titulo": "Relatório do local", "texto": "No escritório foram encontrados: uma taça de água quebrada perto da mesa; um copo intacto com pequena quantidade de água; um relógio de pulso parado às 22h06; uma cadeira fora do lugar; e uma folha rasgada com as palavras “não vou assinar”. Não há sinais de arrombamento.", "pesaContra": [] },
+    { "id": "A2", "envelope": "A", "titulo": "Registro de acesso", "texto": "O elevador registra entradas no segundo andar às 21h48, 21h56, 22h04 e 22h11. O registro não identifica quem entrou: foi usado o cartão geral da equipe. A porta da escada não possui leitor eletrônico.", "pesaContra": ["clara", "tomas"] },
+    { "id": "A3", "envelope": "A", "titulo": "Mensagem incompleta", "texto": "No rascunho de um computador do hotel foi recuperado o trecho: “Se você contar a eles o que aconteceu naquela noite, eu vou…” A mensagem não tem destinatário nem horário confirmado.", "pesaContra": [] },
+    { "id": "A4", "envelope": "A", "titulo": "Foto da festa", "texto": "Uma fotografia tirada às 22h02 mostra Helena perto da varanda, Rafael no bar, Clara conversando com dois convidados e Miguel próximo à escada. A imagem não mostra o corredor do escritório.", "pesaContra": ["miguel", "sofia", "tomas"] },
+    { "id": "B1", "envelope": "B", "titulo": "Nota da manutenção", "texto": "O relógio de pulso de Augusto não estava quebrado: alguém retirou a coroa e ajustou os ponteiros manualmente. O horário 22h06 pode ter sido colocado depois da morte.", "pesaContra": [] },
+    { "id": "B2", "envelope": "B", "titulo": "A pasta azul", "texto": "Uma pasta azul que deveria estar no escritório foi encontrada na sala de arquivo. Dentro havia cópias de pagamentos e uma folha com três assinaturas. Uma das assinaturas foi marcada com caneta azul. A pasta não apresenta impressões digitais úteis.", "pesaContra": ["rafael"] },
+    { "id": "B3", "envelope": "B", "titulo": "O botão", "texto": "Um botão escuro foi recolhido no corredor, próximo à porta do escritório. Miguel reconhece que é do seu casaco. Isso confirma que ele esteve no corredor, mas não determina o horário exato.", "pesaContra": ["miguel"] },
+    { "id": "B4", "envelope": "B", "titulo": "O corredor", "texto": "A câmera do corredor ficou sem gravação entre 21h30 e 22h20. A câmera do saguão mostra uma pessoa atravessando a recepção às 22h09 com a mão direita fechada. O rosto não aparece.", "pesaContra": ["tomas"] },
+    { "id": "C1", "envelope": "C", "titulo": "Laudo preliminar", "texto": "A estimativa revisada aponta que Augusto morreu entre 22h02 e 22h12. Não há evidência de luta corporal. O copo intacto foi recolhido para análise; a taça quebrada não contém vestígios relevantes.", "pesaContra": [] },
+    { "id": "C2", "envelope": "C", "titulo": "Rascunho de agenda", "texto": "Na agenda de Augusto, às 22h00, consta: “conversa final — sala de arquivo”. O compromisso foi escrito à mão e não tem nome associado.", "pesaContra": ["clara"] },
+    { "id": "C3", "envelope": "C", "titulo": "Registro de impressão", "texto": "Uma impressão parcial no verso da folha “não vou assinar” é compatível com alguém que manuseou documentos naquela noite. O laudo não permite identificação individual.", "pesaContra": [] },
+    { "id": "C4", "envelope": "C", "titulo": "O guardanapo", "texto": "Um guardanapo encontrado perto da escada tem uma pequena mancha de tinta azul. A tinta é semelhante à usada para marcar a assinatura na pasta azul. Não é possível afirmar que veio da mesma caneta.", "pesaContra": ["rafael"] }
+  ],
+  "motivos": [
+    "Evitar a auditoria pedida por Augusto nas contas do grupo",
+    "Evitar o corte da mesada e a ruptura com o pai",
+    "O fim de um casamento que estava por um fio",
+    "Impedir que alguém contasse “o que aconteceu naquela noite” (A3)"
+  ],
+  "rodadas": [
+    {
+      "id": 1, "titulo": "Leitura a frio", "abre": ["cenario"],
+      "perguntas": [
+        { "id": "r1q1", "tipo": "escolha", "enunciado": "O médico estima a morte entre 22h00 e 22h15. Qual fato da linha do tempo inicial cai nessa janela?", "opcoes": ["Augusto entra no escritório (21h35)", "Discussão perto do elevador (21h48)", "A música da festa é aumentada (22h03)", "O corpo é encontrado (22h17)"], "correta": 2, "deducao": "Só a música aumentada às 22h03 está entre 22h00 e 22h15 — e a música alta encobre os movimentos no corredor.", "travaSeg": 7, "tempoSeg": 30, "aposta": false },
+        { "id": "r1q2", "tipo": "escolha", "enunciado": "Por onde era possível chegar ao escritório de Augusto?", "opcoes": ["Pelo corredor principal ou pela sala de arquivo", "Por um elevador privativo do escritório", "Pela varanda do segundo andar", "Só pela escada de serviço"], "correta": 0, "deducao": "O cenário diz: só pelo corredor principal ou pela sala de arquivo, cuja porta costuma ficar trancada.", "travaSeg": 6, "tempoSeg": 30, "aposta": false },
+        { "id": "r1q3", "tipo": "escolha", "enunciado": "O que a polícia NÃO encontrou no escritório?", "opcoes": ["Uma taça quebrada", "O celular da vítima", "Um relógio parado", "Uma mensagem incompleta"], "correta": 1, "deducao": "O celular de Augusto não foi encontrado no escritório. Taça, relógio e mensagem estão entre os primeiros elementos recolhidos.", "travaSeg": 5, "tempoSeg": 30, "aposta": false }
+      ]
+    },
+    {
+      "id": 2, "titulo": "Palácio da memória", "abre": ["A1", "A2", "A3", "A4"],
+      "perguntas": [
+        { "id": "r2q1", "tipo": "memoria", "mostrarPistasSeg": 15, "enunciado": "Na foto da festa das 22h02, quem NÃO aparece?", "opcoes": ["Helena", "Rafael", "Miguel", "Tomás"], "correta": 3, "deducao": "A4: a foto mostra Helena, Rafael, Clara e Miguel. Tomás não aparece — e a imagem não mostra o corredor do escritório.", "travaSeg": 5, "tempoSeg": 30, "aposta": false },
+        { "id": "r2q2", "tipo": "memoria", "mostrarPistasSeg": 15, "enunciado": "Por que o registro do elevador não identifica ninguém?", "opcoes": ["Foi usado o cartão geral da equipe, e a escada não tem leitor", "A câmera do corredor estava sem gravação", "O sistema só registra as saídas do andar", "Os horários foram ajustados manualmente"], "correta": 0, "deducao": "A2: as entradas usaram o cartão geral da equipe, e a porta da escada não possui leitor eletrônico.", "travaSeg": 7, "tempoSeg": 30, "aposta": false },
+        { "id": "r2q3", "tipo": "memoria", "mostrarPistasSeg": 15, "enunciado": "Em que horário estava parado o relógio de pulso de Augusto?", "opcoes": ["22h03", "22h06", "22h11", "22h17"], "correta": 1, "deducao": "A1: o relógio de pulso estava parado às 22h06.", "travaSeg": 5, "tempoSeg": 30, "aposta": false }
+      ]
+    },
+    {
+      "id": 3, "titulo": "Linha do tempo", "abre": ["B1", "B2", "B3", "B4"],
+      "perguntas": [
+        { "id": "r3q1", "tipo": "ordenar", "enunciado": "Coloque os fatos em ordem cronológica.", "opcoes": ["Uma discussão é ouvida perto do elevador", "Uma pessoa atravessa o saguão com a mão direita fechada", "Augusto é visto entrando no escritório", "Foto da festa sem o corredor do escritório"], "ordemCorreta": [2, 0, 3, 1], "deducao": "21h35 Augusto entra no escritório → 21h48 discussão perto do elevador → 22h02 foto da festa (A4) → 22h09 pessoa no saguão (B4).", "travaSeg": 6, "tempoSeg": 45, "aposta": false },
+        { "id": "r3q2", "tipo": "escolha", "enunciado": "Depois da nota da manutenção (B1), o que vale o horário 22h06 do relógio?", "opcoes": ["É a hora exata da morte", "Nada como prova: pode ter sido colocado depois da morte", "Prova que a morte foi antes das 22h00", "Confirma a entrada do elevador das 22h04"], "correta": 1, "deducao": "B1: alguém retirou a coroa e ajustou os ponteiros. O 22h06 pode ter sido colocado depois da morte.", "travaSeg": 7, "tempoSeg": 30, "aposta": false },
+        { "id": "r3q3", "tipo": "escolha", "enunciado": "O que o botão do casaco de Miguel prova?", "opcoes": ["Que ele esteve no corredor às 21h48", "Que ele entrou no escritório", "Que ele esteve no corredor, mas não a que horas", "Que ele estava lá entre 22h00 e 22h15"], "correta": 2, "deducao": "B3: o botão confirma que Miguel esteve no corredor, mas não determina o horário exato.", "travaSeg": 6, "tempoSeg": 30, "aposta": false }
+      ]
+    },
+    {
+      "id": 4, "titulo": "A aposta de Jane", "abre": ["C1", "C2", "C3", "C4"],
+      "perguntas": [
+        { "id": "r4q1", "tipo": "escolha", "enunciado": "Com a nova janela da morte (22h02 a 22h12), quais entradas do elevador no segundo andar contam?", "opcoes": ["21h48 e 21h56", "21h56 e 22h04", "22h04 e 22h11", "Só a de 22h11"], "correta": 2, "deducao": "C1 fecha a janela em 22h02–22h12. Das entradas de A2, só 22h04 e 22h11 caem nela.", "travaSeg": 8, "tempoSeg": 30, "aposta": true },
+        { "id": "r4q2", "tipo": "escolha", "enunciado": "O que o guardanapo com tinta azul (C4) permite afirmar?", "opcoes": ["Que a tinta veio da mesma caneta da pasta azul", "Que a tinta é semelhante à da assinatura marcada", "Que quem o largou marcou a assinatura", "Que ele saiu da sala de arquivo"], "correta": 1, "deducao": "C4: a tinta é semelhante, mas não é possível afirmar que veio da mesma caneta.", "travaSeg": 7, "tempoSeg": 30, "aposta": true },
+        { "id": "r4q3", "tipo": "escolha", "enunciado": "Segundo o laudo preliminar (C1), o que foi recolhido para análise?", "opcoes": ["A taça quebrada", "O copo intacto", "A pasta azul", "A folha “não vou assinar”"], "correta": 1, "deducao": "C1: o copo intacto foi para análise; a taça quebrada não contém vestígios relevantes.", "travaSeg": 6, "tempoSeg": 30, "aposta": true }
+      ]
+    },
+    {
+      "id": 5, "titulo": "A acusação", "abre": [],
+      "perguntas": [
+        { "id": "final", "tipo": "acusacao", "enunciado": "Quem matou Augusto Valença? Escolha o culpado, o motivo e as 3 provas mais fortes.", "deducao": "", "travaSeg": 5, "tempoSeg": 90, "aposta": false }
+      ]
+    }
+  ]
+}

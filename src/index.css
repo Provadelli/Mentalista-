@@ -8,8 +8,10 @@
   --color-papel: #f5eedc;
   --color-tinta: #1e1a17;
   --color-redjohn: #9b1b1b;
+  /* Vermelho Red John para texto sobre fundo escuro (contraste AA) */
+  --color-alerta: #e35d5d;
   --color-ouro: #c9a227;
-  --color-pires: #4f7ca8;
+  --color-pires: #426b93;
   --color-feltro: #2f6b4f;
   --color-vinho: #7a2e3a;
 
