@@ -1,11 +1,16 @@
+import { useEffect } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { som } from './som'
 
 /** Cronômetro em forma de relógio de bolso. Ponteiro vermelho nos últimos 5 s. */
-export default function RelogioDeBolso({ restanteMs, totalMs, tamanho = 120 }: { restanteMs: number; totalMs: number; tamanho?: number }) {
+export default function RelogioDeBolso({ restanteMs, totalMs, tamanho = 120, tiquetaque = false }: { restanteMs: number; totalMs: number; tamanho?: number; tiquetaque?: boolean }) {
   const reduzir = useReducedMotion()
   const seg = Math.ceil(Math.max(restanteMs, 0) / 1000)
   const fracao = totalMs > 0 ? 1 - Math.max(restanteMs, 0) / totalMs : 1
   const urgente = seg <= 5
+  useEffect(() => {
+    if (tiquetaque && seg > 0 && seg <= 10) som.tique(seg <= 5)
+  }, [seg, tiquetaque])
   return (
     <motion.div
       style={{ width: tamanho, transformOrigin: '50% -20%' }}

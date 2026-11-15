@@ -52,7 +52,7 @@ export default function Pergunta({ rodada, pergunta, numero, destravaEm, fimEm, 
               {responderam} de {total} responderam
             </p>
           </div>
-          <RelogioDeBolso restanteMs={fimEm - agora} totalMs={fimEm - inicioPergunta} tamanho={140} />
+          <RelogioDeBolso restanteMs={fimEm - agora} totalMs={fimEm - inicioPergunta} tamanho={140} tiquetaque />
         </div>
 
         <motion.section
@@ -88,7 +88,7 @@ export default function Pergunta({ rodada, pergunta, numero, destravaEm, fimEm, 
               key={o}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: travado ? 0.55 : 1, scale: 1 }}
-              className={`${RESPOSTAS[i].cor} flex items-center gap-5 rounded-sm p-6 text-papel shadow-lg`}
+              className={`${RESPOSTAS[i].cor} flex items-center gap-5 rounded-sm p-6 shadow-lg`}
             >
               <span aria-hidden className="text-[clamp(2rem,3vw,3.5rem)]">{RESPOSTAS[i].simbolo}</span>
               <span className="font-titulo text-[clamp(1.2rem,2vw,2.4rem)] font-bold">{RESPOSTAS[i].letra}</span>

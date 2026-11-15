@@ -5,6 +5,7 @@ import { perguntaDoPasso } from '../jogo/maquinaEstados'
 import { useSalaHost } from '../realtime/useSalaHost'
 import AberturaRodada from './AberturaRodada'
 import Acusacao from './Acusacao'
+import BotaoSom from './BotaoSom'
 import Configuracao from './Configuracao'
 import Lobby from './Lobby'
 import Pergunta from './Pergunta'
@@ -14,6 +15,15 @@ import Revelacao from './Revelacao'
 import Veredito from './Veredito'
 
 export default function Partida() {
+  return (
+    <>
+      <Tela />
+      <BotaoSom />
+    </>
+  )
+}
+
+function Tela() {
   const { sala = '' } = useParams()
   const h = useSalaHost(sala)
   const [editando, setEditando] = useState(false)

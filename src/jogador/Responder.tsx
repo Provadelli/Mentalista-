@@ -28,7 +28,7 @@ export default function Responder({ fase, desvio, minhaResposta, responder }: Pr
         <div className="grid flex-1 place-items-center">
           <div>
             {r ? (
-              <span className={`${r.cor} mx-auto grid h-24 w-24 place-items-center rounded-sm text-5xl text-papel`}>{r.simbolo}</span>
+              <span className={`${r.cor} mx-auto grid h-24 w-24 place-items-center rounded-sm text-5xl`}>{r.simbolo}</span>
             ) : (
               <span className="mx-auto grid h-24 w-24 place-items-center rounded-sm bg-manila text-5xl text-tinta">⠿</span>
             )}
@@ -85,7 +85,7 @@ export default function Responder({ fase, desvio, minhaResposta, responder }: Pr
                   navigator.vibrate?.(30)
                   responder(fase.aposta ? { opcao: i, aposta } : { opcao: i })
                 }}
-                className={`${RESPOSTAS[i].cor} flex min-h-24 w-full flex-col items-center justify-center gap-1 rounded-sm p-3 text-papel shadow-lg transition active:scale-95 disabled:opacity-40`}
+                className={`${RESPOSTAS[i].cor} flex min-h-24 w-full flex-col items-center justify-center gap-1 rounded-sm p-3 shadow-lg transition active:scale-95 disabled:opacity-40`}
               >
                 <span aria-hidden className="text-4xl">{RESPOSTAS[i].simbolo}</span>
                 <span className="font-titulo text-xl font-bold">{RESPOSTAS[i].letra}</span>

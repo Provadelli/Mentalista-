@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { som } from '../componentes/som'
 import Avatar from '../componentes/Avatar'
 import Smiley from '../componentes/Smiley'
 import { CASO } from '../dados/caso'
@@ -11,6 +13,10 @@ type Props = { v: Extract<FasePublica, { fase: 'VEREDITO' }>; acusacoes: Record<
 const nome = (id: string) => CASO.suspeitos.find((s) => s.id === id)?.nome ?? id
 
 export default function Veredito({ v, acusacoes, jogadores, avancar }: Props) {
+  useEffect(() => {
+    const t = setTimeout(som.carimbo, 2000)
+    return () => clearTimeout(t)
+  }, [])
   const titulo = v.modo === 'fechado' ? 'O culpado é' : v.acusados.length > 1 ? 'O júri se dividiu' : 'O júri acusa'
   return (
     <main className="min-h-dvh bg-tinta p-6 lg:p-10">
@@ -20,7 +26,7 @@ export default function Veredito({ v, acusacoes, jogadores, avancar }: Props) {
           <div>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-dossie text-2xl text-manila">{titulo}…</motion.p>
             <motion.h1 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 2, duration: 1 }}
-              className="font-titulo text-[clamp(2.5rem,5vw,5.5rem)] font-extrabold text-redjohn">
+              className="font-titulo text-[clamp(2.5rem,5vw,5.5rem)] font-extrabold text-alerta">
               {v.acusados.length ? v.acusados.map(nome).join(' e ') : 'ninguém'}
             </motion.h1>
           </div>

@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { som } from '../componentes/som'
 import { RESPOSTAS } from '../componentes/respostas'
 import type { Pergunta } from '../jogo/tipos'
 import BotaoAvancar from './Botao'
@@ -53,6 +55,11 @@ export default function Revelacao({ pergunta, contagem, avancar }: Props) {
 }
 
 function Carimbo() {
+  useEffect(() => {
+    som.revelacao()
+    const t = setTimeout(som.carimbo, 300)
+    return () => clearTimeout(t)
+  }, [])
   return (
     <motion.span
       initial={{ opacity: 0, scale: 2.4, rotate: -20 }}

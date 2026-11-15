@@ -118,8 +118,8 @@ A interface imita a mesa de um investigador do CBI, com quadro de cortiça, past
 
 | Botão | Símbolo | Cor |
 | --- | --- | --- |
-| A | Xícara de chá | Azul pires `#4F7CA8` |
-| B | Distintivo | Dourado `#C9A227` |
+| A | Xícara de chá | Azul pires `#426B93` |
+| B | Distintivo | Dourado `#C9A227` (texto escuro) |
 | C | Carta de baralho | Verde feltro `#2F6B4F` |
 | D | Lupa | Vinho `#7A2E3A` |
 
@@ -135,6 +135,7 @@ Cada botão tem símbolo e letra, além da cor, para funcionar para daltônicos.
 | `papel` | Texto sobre fundo escuro | `#F5EEDC` |
 | `tinta` | Texto sobre papel | `#1E1A17` |
 | `redjohn` | Crime, final, erro | `#9B1B1B` |
+| `alerta` | Vermelho para texto sobre fundo escuro | `#E35D5D` |
 | `ouro` | Pontos e pódio | `#C9A227` |
 
 ### Tipografia
@@ -171,8 +172,8 @@ O site é estático, hospedado na **Vercel**. A Vercel não mantém WebSocket ab
 | Estado | Zustand | Estado da partida no cliente |
 | Animação | Framer Motion | Transições |
 | QR code | qrcode.react | Link `/entrar?sala=<código>` |
-| Arrastar | dnd-kit (a instalar) | Rodada de ordenar, com toque |
-| Som | Howler.js (a instalar) | Tique do relógio, carimbo, revelação |
+| Arrastar | dnd-kit | Rodada de ordenar, com toque |
+| Som | Web Audio (sintetizado, sem arquivos) | Tique do relógio, carimbo, revelação |
 | Hospedagem | Vercel | Deploy automático a cada push na `main` |
 
 ### Regras
@@ -307,6 +308,6 @@ O celular é pensado primeiro para telas pequenas. A tela do host é pensada par
 - [x] Acusação e veredito nos dois modos
 
 ### Fase 5 — Acabamento
-- [ ] Animações, sons e relógio de bolso
+- [x] Animações, sons e relógio de bolso
 - [ ] Teste com 7 celulares reais (iPhone e Android)
-- [ ] Ajustes de contraste, tamanho de fonte na TV e desempenho
+- [x] Ajustes de contraste, tamanho de fonte na TV e desempenho

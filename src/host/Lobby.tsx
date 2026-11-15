@@ -28,7 +28,7 @@ export default function Lobby({ sala, jogadores, conectado, remover, comecar, mo
         </div>
         <div>
           <h1 className="font-titulo text-4xl text-tinta drop-shadow-sm lg:text-6xl">Aguardando investigadores</h1>
-          <p className="mt-3 font-dossie text-lg text-tinta/80">
+          <p className="mt-3 font-dossie text-lg text-tinta">
             {jogadores.length} de {LIMITE_JOGADORES} na sala
           </p>
           {modoLocal && (
@@ -77,7 +77,7 @@ export default function Lobby({ sala, jogadores, conectado, remover, comecar, mo
           >
             Começar
           </button>
-          <p className="mt-4 font-dossie text-tinta/80">
+          <p className="mt-4 font-dossie text-tinta">
             Final: {modo === 'fechado' ? 'caso fechado' : 'júri'} ·{' '}
             <button onClick={configurar} className="underline">alterar</button>
           </p>

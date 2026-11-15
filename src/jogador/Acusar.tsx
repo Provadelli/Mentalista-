@@ -46,7 +46,7 @@ export default function Acusar({ fase, desvio, enviada, acusar }: Props) {
     <Tela>
       <div className="flex items-center justify-between font-dossie text-sm text-manila">
         <span>{ETAPAS[etapa]} · {etapa + 1} de 4</span>
-        <span className={restante <= 10 ? 'text-redjohn' : ''}>{restante} s</span>
+        <span className={restante <= 10 ? 'text-alerta' : ''}>{restante} s</span>
       </div>
       <div className="mt-3 flex-1 space-y-2 overflow-y-auto">
         {etapa === 0 && fase.suspeitos.map((s) => (
