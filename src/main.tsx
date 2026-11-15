@@ -10,7 +10,7 @@ const Jogador = lazy(() => import('./jogador/Jogador'))
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <Suspense fallback={<div className="grid min-h-dvh place-items-center font-dossie">Abrindo o arquivo…</div>}>
         <Routes>
           <Route path="/" element={<Inicio />} />

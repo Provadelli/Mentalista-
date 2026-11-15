@@ -12,7 +12,7 @@ O dossiê original está em `docs/dossie-caso-047.pdf`. Perguntas e textos do jo
 - `npm run build` — checagem de tipos + build de produção
 - `npm run lint` — oxlint
 - `npm test` — testes de pontuação (node:test)
-- Sem Supabase configurado, `npm run dev` usa um modo local: host numa aba, jogadores em outras abas do mesmo navegador.
+- Tempo real: sem variáveis do Supabase, usa PeerJS (precisa de internet). Para testar sem internet, abra host e jogadores com `?abas` na URL (abas do mesmo navegador).
 
 ## Regras do projeto
 
@@ -21,4 +21,4 @@ O dossiê original está em `docs/dossie-caso-047.pdf`. Perguntas e textos do jo
 - O host é a autoridade: gabarito e pontuação nunca vão para o celular antes da revelação.
 - Mobile first no jogador; host pensado para 16:9 na TV.
 - Animar só `transform` e `opacity`; respeitar `prefers-reduced-motion`.
-- Deploy: push na `main` publica na Vercel. Variáveis: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
+- Deploy: push na `main` publica na Vercel. Variáveis opcionais: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (sem elas, PeerJS).
