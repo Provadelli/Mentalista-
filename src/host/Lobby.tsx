@@ -5,9 +5,17 @@ import { PERSONAGENS } from '../dados/personagens'
 import { modoLocal } from '../realtime/cliente'
 import { LIMITE_JOGADORES, type Jogador } from '../jogo/tipos'
 
-type Props = { sala: string; jogadores: Jogador[]; conectado: boolean; remover: (id: string) => void; comecar: () => void }
+type Props = {
+  sala: string
+  jogadores: Jogador[]
+  conectado: boolean
+  remover: (id: string) => void
+  comecar: () => void
+  modo: 'fechado' | 'juri'
+  configurar: () => void
+}
 
-export default function Lobby({ sala, jogadores, conectado, remover, comecar }: Props) {
+export default function Lobby({ sala, jogadores, conectado, remover, comecar, modo, configurar }: Props) {
   const link = `${window.location.origin}/entrar?sala=${sala}`
 
   return (
@@ -69,6 +77,10 @@ export default function Lobby({ sala, jogadores, conectado, remover, comecar }: 
           >
             Começar
           </button>
+          <p className="mt-4 font-dossie text-tinta/80">
+            Final: {modo === 'fechado' ? 'caso fechado' : 'júri'} ·{' '}
+            <button onClick={configurar} className="underline">alterar</button>
+          </p>
         </div>
       </div>
     </main>

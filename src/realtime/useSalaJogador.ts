@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { type Canal, canalDaSala, obterPlayerId, supabase } from './cliente'
-import type { EstadoSala, FasePublica, MsgRecusa, MsgResponder } from '../jogo/tipos'
+import type { Aposta, EstadoSala, FasePublica, MsgAcusar, MsgFicha, MsgRecusa, MsgResponder } from '../jogo/tipos'
 
 export type StatusJogador =
   | 'conectando'
@@ -12,6 +12,8 @@ export type StatusJogador =
   | 'emAndamento'
   | 'semServidor'
 
+export type MinhaResposta = { perguntaId: string; opcao?: number; ordem?: number[]; aposta?: Aposta; confirmada: boolean }
+
 const MOTIVOS: Record<MsgRecusa['motivo'], StatusJogador> = { cheia: 'cheia', avatar: 'avatarEmUso', emAndamento: 'emAndamento' }
 
 export function useSalaJogador(sala: string) {
@@ -20,7 +22,8 @@ export function useSalaJogador(sala: string) {
   const [fase, setFase] = useState<FasePublica>({ fase: 'LOBBY' })
   /** Diferença entre o relógio do host e o deste aparelho. */
   const [desvio, setDesvio] = useState(0)
-  const [minhaResposta, setMinhaResposta] = useState<{ perguntaId: string; opcao: number; confirmada: boolean } | null>(null)
+  const [minhaResposta, setMinhaResposta] = useState<MinhaResposta | null>(null)
+  const [ficha, setFicha] = useState<MsgFicha | null>(null)
   const [status, setStatus] = useState<StatusJogador>(supabase ? 'conectando' : 'semServidor')
   const canalRef = useRef<Canal | null>(null)
 
@@ -38,12 +41,16 @@ export function useSalaJogador(sala: string) {
       })
       .on('broadcast', { event: 'fase' }, ({ payload }) => {
         const f = payload as FasePublica
-        if (f.fase === 'PERGUNTA') setDesvio(f.agora - Date.now())
+        if (f.fase === 'PERGUNTA' || f.fase === 'ACUSACAO') setDesvio(f.agora - Date.now())
         setFase(f)
       })
       .on('broadcast', { event: 'recebida' }, ({ payload }) => {
         const r = payload as { playerId: string; perguntaId: string }
         if (r.playerId === playerId) setMinhaResposta((m) => (m && m.perguntaId === r.perguntaId ? { ...m, confirmada: true } : m))
+      })
+      .on('broadcast', { event: 'ficha' }, ({ payload }) => {
+        const f = payload as MsgFicha
+        if (f.playerId === playerId) setFicha(f)
       })
       .on('broadcast', { event: 'recusa' }, ({ payload }) => {
         const r = payload as MsgRecusa
@@ -70,11 +77,17 @@ export function useSalaJogador(sala: string) {
     enviar('entrar', { playerId, nome, avatar })
   }
 
-  const responder = (opcao: number) => {
+  const responder = (r: { opcao?: number; ordem?: number[]; aposta?: Aposta }) => {
     if (fase.fase !== 'PERGUNTA') return
-    setMinhaResposta({ perguntaId: fase.perguntaId, opcao, confirmada: false })
-    const msg: MsgResponder = { playerId, perguntaId: fase.perguntaId, opcao }
+    setMinhaResposta({ perguntaId: fase.perguntaId, ...r, confirmada: false })
+    const msg: MsgResponder = { playerId, perguntaId: fase.perguntaId, ...r }
     enviar('responder', msg)
+  }
+
+  const acusar = (a: Omit<MsgAcusar, 'playerId'>) => {
+    setMinhaResposta({ perguntaId: 'acusacao', confirmada: false })
+    const msg: MsgAcusar = { playerId, ...a }
+    enviar('acusar', msg)
   }
 
   const eu = estado?.jogadores.find((j) => j.playerId === playerId) ?? null
@@ -91,6 +104,8 @@ export function useSalaJogador(sala: string) {
     minhaResposta,
     entrar,
     responder,
+    acusar,
+    ficha,
     tentarDeNovo: () => setStatus('escolhendo'),
   }
 }

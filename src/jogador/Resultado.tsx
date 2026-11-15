@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import type { Jogador } from '../jogo/tipos'
 import Tela from './Tela'
 
-export default function Resultado({ eu, posicao, resultado }: { eu: Jogador; posicao: number; resultado?: { acertou: boolean; ganho: number } }) {
+export default function Resultado({ eu, posicao, resultado, titulo }: { eu: Jogador; posicao: number; resultado?: { acertou: boolean; ganho: number; detalhe?: string }; titulo?: string }) {
   const acertou = !!resultado?.acertou
   useEffect(() => {
     navigator.vibrate?.(acertou ? [40, 60, 40] : 200)
@@ -13,8 +13,9 @@ export default function Resultado({ eu, posicao, resultado }: { eu: Jogador; pos
       <div className="grid flex-1 place-items-center">
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}>
           <p className={`font-titulo text-5xl font-extrabold ${acertou ? 'text-ouro' : 'text-papel'}`}>
-            {resultado ? (acertou ? 'Dedução certeira!' : 'Não foi dessa vez') : 'Sem resposta'}
+            {titulo ?? (resultado ? (acertou ? 'Dedução certeira!' : 'Não foi dessa vez') : 'Sem resposta')}
           </p>
+          {resultado?.detalhe && <p className="mt-2 font-dossie text-manila">{resultado.detalhe}</p>}
           <p className="mt-4 font-titulo text-3xl">
             {resultado && resultado.ganho !== 0 ? `${resultado.ganho > 0 ? '+' : ''}${resultado.ganho} pts` : '+0 pts'}
           </p>

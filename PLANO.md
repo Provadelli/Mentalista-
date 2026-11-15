@@ -301,10 +301,10 @@ O celular é pensado primeiro para telas pequenas. A tela do host é pensada par
 - [x] Telas Responder / Resultado no celular, com trava de leitura
 - [x] Pontuação (`pontuacao.ts`) com testes
 
-### Fase 4 — Rodadas especiais
-- [ ] Memória (pistas somem), Ordenar (dnd-kit) e Aposta de Jane
-- [ ] Tutorial com "Pular" e ficha secreta
-- [ ] Acusação e veredito nos dois modos
+### Fase 4 — Rodadas especiais ✅
+- [x] Memória (pistas somem), Ordenar (dnd-kit) e Aposta de Jane
+- [x] Tutorial com "Pular" e ficha secreta
+- [x] Acusação e veredito nos dois modos
 
 ### Fase 5 — Acabamento
 - [ ] Animações, sons e relógio de bolso

@@ -48,11 +48,35 @@ export type FasePublica =
   | {
       fase: 'REVELACAO'
       perguntaId: string
+      tipo: 'escolha' | 'memoria' | 'ordenar'
       correta: number | null
+      ordemCorreta: number[] | null
       deducao: string
-      resultados: Record<string, { acertou: boolean; ganho: number }>
+      resultados: Record<string, Resultado>
     }
   | { fase: 'RANKING' }
+  | {
+      fase: 'ACUSACAO'
+      suspeitos: { id: string; nome: string; papel: string }[]
+      motivos: string[]
+      evidencias: { id: string; titulo: string }[]
+      agora: number
+      fimEm: number
+    }
+  | {
+      fase: 'VEREDITO'
+      modo: ModoFinal
+      /** Caso fechado: o culpado definido. Júri: o(s) mais votado(s). */
+      acusados: string[]
+      votos: Record<string, number>
+      resultados: Record<string, Resultado>
+    }
   | { fase: 'PODIO' }
 
-export type MsgResponder = { playerId: string; perguntaId: string; opcao?: number; ordem?: number[]; aposta?: 1 | 2 | 3 }
+export type Resultado = { acertou: boolean; ganho: number; detalhe?: string }
+export type ModoFinal = 'fechado' | 'juri'
+export type Aposta = 1 | 2 | 3
+
+export type MsgResponder = { playerId: string; perguntaId: string; opcao?: number; ordem?: number[]; aposta?: Aposta }
+export type MsgAcusar = { playerId: string; culpado: string; motivo: number; provas: string[] }
+export type MsgFicha = { playerId: string; tipo: 'suspeito' | 'apoio'; nome: string; papel: string; ficha: string }

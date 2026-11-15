@@ -8,7 +8,7 @@ import type { Pergunta as TPergunta, Rodada } from '../jogo/tipos'
 
 type Props = {
   rodada: Rodada
-  pergunta: Extract<TPergunta, { tipo: 'escolha' | 'memoria' }>
+  pergunta: Exclude<TPergunta, { tipo: 'acusacao' }>
   numero: number
   destravaEm: number
   fimEm: number
@@ -20,6 +20,7 @@ export default function Pergunta({ rodada, pergunta, numero, destravaEm, fimEm, 
   const agora = useAgora()
   const inicioPergunta = fimEm - pergunta.tempoSeg * 1000
   const memorizando = pergunta.tipo === 'memoria' && agora < inicioPergunta
+  const textoOrdenar = pergunta.tipo === 'ordenar' ? ' Arraste os cartões no celular.' : ''
 
   if (memorizando) {
     const pistas = CASO.evidencias.filter((e) => rodada.abre.includes(e.id))
@@ -62,9 +63,25 @@ export default function Pergunta({ rodada, pergunta, numero, destravaEm, fimEm, 
           className="papel-arquivo relative mt-4 rounded-sm p-8"
         >
           <span className="carimbo absolute right-6 top-4 text-sm">Confidencial</span>
-          <h1 className="pr-36 font-dossie text-[clamp(1.5rem,2.6vw,3rem)] leading-snug">{pergunta.enunciado}</h1>
+          <h1 className="pr-36 font-dossie text-[clamp(1.5rem,2.6vw,3rem)] leading-snug">{pergunta.enunciado}{textoOrdenar}</h1>
         </motion.section>
 
+        {pergunta.aposta && (
+          <p className="mt-4 font-titulo text-[clamp(1.2rem,1.8vw,2rem)] text-ouro">
+            A aposta de Jane: 1x, 2x ou 3x. Só aposte alto se tiver certeza.
+          </p>
+        )}
+        {pergunta.tipo === 'ordenar' ? (
+          <ul className="mt-8 grid flex-1 grid-cols-2 gap-5 xl:grid-cols-4">
+            {pergunta.opcoes.map((o, i) => (
+              <motion.li key={o} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i }}
+                className="papel-arquivo flex items-center rounded-sm p-6 font-dossie text-[clamp(1.1rem,1.7vw,2rem)] leading-snug"
+                style={{ transform: `rotate(${(i % 3) - 1}deg)` }}>
+                {o}
+              </motion.li>
+            ))}
+          </ul>
+        ) : (
         <ul className="mt-8 grid flex-1 grid-cols-2 gap-5">
           {pergunta.opcoes.map((o, i) => (
             <motion.li
@@ -79,6 +96,7 @@ export default function Pergunta({ rodada, pergunta, numero, destravaEm, fimEm, 
             </motion.li>
           ))}
         </ul>
+        )}
         {travado && (
           <p className="mt-4 text-center font-dossie text-lg text-manila">
             Leia com calma… respostas liberadas em {Math.ceil((destravaEm - agora) / 1000)} s
