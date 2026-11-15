@@ -33,12 +33,12 @@ export default function Lobby({ sala, jogadores, conectado, remover, comecar, mo
           </p>
           {modoLocal && (
             <p className="mt-3 rounded-sm bg-couro px-4 py-2 font-dossie text-papel">
-              Modo local: sem Supabase, os jogadores entram por outras abas deste navegador.
+              Modo de teste (?abas): os jogadores entram por outras abas deste navegador.
             </p>
           )}
           {!conectado && (
             <p className="mt-3 rounded-sm bg-redjohn px-4 py-2 font-dossie text-papel">
-              Tempo real desligado: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.
+              Tempo real indisponível neste navegador.
             </p>
           )}
           <ul className="mt-8 grid grid-cols-3 gap-6 sm:grid-cols-4 xl:grid-cols-5">

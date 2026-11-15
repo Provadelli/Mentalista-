@@ -162,13 +162,13 @@ São 10 opções para 7 jogadores (veja `src/dados/personagens.ts`): Patrick Jan
 
 ## 5. Arquitetura técnica
 
-O site é estático, hospedado na **Vercel**. A Vercel não mantém WebSocket aberto, então o tempo real usa o **Supabase Realtime**: um canal por sala, com *broadcast* e *presence*. **O navegador do host é a autoridade.** Ele guarda o gabarito, mede o tempo e calcula os pontos. Os celulares só enviam respostas e recebem o estado.
+O site é estático, hospedado na **Vercel**. A Vercel não mantém WebSocket aberto, então o tempo real usa **PeerJS** (WebRTC direto entre celulares e host, sem conta nem chaves). Se `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` existirem, usa o **Supabase Realtime** no lugar. **O navegador do host é a autoridade.** Ele guarda o gabarito, mede o tempo e calcula os pontos. Os celulares só enviam respostas e recebem o estado.
 
 | Camada | Escolha | Função |
 | --- | --- | --- |
 | Front-end | React 19 + Vite + TypeScript | Telas do host e do jogador |
 | Estilo | Tailwind CSS v4 (`@theme` em `index.css`) | Paleta, fontes e componentes |
-| Tempo real | Supabase Realtime (`@supabase/supabase-js`) | Canal `sala:<código>`, broadcast + presence |
+| Tempo real | PeerJS (WebRTC, padrão, sem conta) ou Supabase Realtime (se as variáveis existirem) | O host abre o peer `mentalista-caso047-sala-<código>` e os celulares se conectam direto a ele |
 | Estado | Zustand | Estado da partida no cliente |
 | Animação | Framer Motion | Transições |
 | QR code | qrcode.react | Link `/entrar?sala=<código>` |
@@ -285,7 +285,7 @@ O celular é pensado primeiro para telas pequenas. A tela do host é pensada par
 - [x] Telas iniciais: Início, Lobby com QR, Entrar
 - [x] `vercel.json` para as rotas
 - [ ] Projeto na Vercel ligado ao repositório
-- [ ] Projeto no Supabase e variáveis de ambiente na Vercel
+- [x] Tempo real sem Supabase (PeerJS) — Supabase continua opcional
 
 ### Fase 1 — Sala em tempo real ✅
 - [x] Cliente Supabase e hooks `useSalaHost` / `useSalaJogador`

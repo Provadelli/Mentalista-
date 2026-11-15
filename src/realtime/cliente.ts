@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { realtimePeer } from './peer'
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const chave = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
@@ -13,7 +14,7 @@ export type Canal = {
   presenceState(): Record<string, unknown>
 }
 
-type Realtime = { channel(nome: string, opts: { config: { presence: { key: string } } }): Canal; removeChannel(c: Canal): unknown }
+export type Realtime = { channel(nome: string, opts: { config: { presence: { key: string } } }): Canal; removeChannel(c: Canal): unknown }
 
 const supabaseReal = url && chave ? createClient(url, chave) : null
 
@@ -88,11 +89,17 @@ function realtimeLocal(): Realtime {
   }
 }
 
+const usarAbas = typeof location !== 'undefined' && new URLSearchParams(location.search).has('abas')
+
+/**
+ * Ordem: Supabase (se configurado) → abas do mesmo navegador (`?abas`, para testes)
+ * → PeerJS (padrão: conexão direta entre celulares e host, sem conta nem chaves).
+ */
 export const supabase: Realtime | null =
   (supabaseReal as unknown as Realtime | null) ??
-  (import.meta.env.DEV && typeof BroadcastChannel !== 'undefined' ? realtimeLocal() : null)
+  (usarAbas && typeof BroadcastChannel !== 'undefined' ? realtimeLocal() : realtimePeer())
 
-export const modoLocal = !supabaseReal && !!supabase
+export const modoLocal = !supabaseReal && usarAbas
 
 export const canalDaSala = (sala: string) => `sala:${sala}`
 
