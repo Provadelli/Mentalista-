@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default function Lobby({ sala, jogadores, conectado, remover, comecar, modo, configurar }: Props) {
-  const link = `${window.location.origin}/entrar?sala=${sala}`
+  const link = `${window.location.origin}${import.meta.env.BASE_URL}entrar?sala=${sala}${modoLocal ? '&abas' : ''}`
 
   return (
     <main className="fundo-cortica min-h-dvh p-6 lg:p-12">

@@ -10,7 +10,7 @@ export default function Avatar({ id, className = '' }: { id: string; className?:
       {semFoto ? (
         iniciais(nome)
       ) : (
-        <img src={`/avatars/${id}.webp`} alt="" className="h-full w-full object-cover" onError={() => setSemFoto(true)} />
+        <img src={`${import.meta.env.BASE_URL}avatars/${id}.webp`} alt="" className="h-full w-full object-cover" onError={() => setSemFoto(true)} />
       )}
     </span>
   )
